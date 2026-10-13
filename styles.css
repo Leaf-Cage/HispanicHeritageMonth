@@ -1,0 +1,778 @@
+:root {
+  --bg-sky: #f7e2d3;
+  --mountain-1: #e09f67;
+  --mountain-2: #c1683d;
+  --mountain-3: #702f23;
+  --peru-red: #d9383a;
+  --peru-white: #ffffff;
+  --peru-gold: #f2b705;
+  --card-bg: #fffcf7;
+  --text-dark: #3a2219;
+  --text-muted: #8c6a5d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--bg-sky);
+}
+
+/* --- LANDSCAPE BACKDROP --- */
+.landscape-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #fceade 0%, #f7d2be 50%, #e8a88c 100%);
+}
+
+/* --- SECRET SUN BUTTON --- */
+.sun.secret-sun-btn {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, #fff3d1 0%, #f2b705 70%, rgba(242,183,5,0) 100%);
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.9;
+  cursor: pointer;
+  z-index: 10;
+  animation: sunPulse 3s ease-in-out infinite alternate;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.sun.secret-sun-btn:hover {
+  transform: scale(1.15);
+  filter: blur(0px) drop-shadow(0 0 25px #f2b705);
+}
+
+@keyframes sunPulse {
+  0% { transform: scale(1); filter: blur(3px); }
+  100% { transform: scale(1.08); filter: blur(1px) drop-shadow(0 0 15px rgba(242,183,5,0.8)); }
+}
+
+.mountains {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.mountain-back {
+  height: 45vh;
+  background: var(--mountain-1);
+  clip-path: polygon(0 100%, 15% 40%, 35% 70%, 55% 30%, 80% 65%, 100% 20%, 100% 100%);
+  opacity: 0.6;
+}
+
+.mountain-mid {
+  height: 35vh;
+  background: var(--mountain-2);
+  clip-path: polygon(0 100%, 25% 45%, 45% 80%, 70% 35%, 90% 75%, 100% 50%, 100% 100%);
+  opacity: 0.8;
+}
+
+.mountain-front {
+  height: 22vh;
+  background: var(--mountain-3);
+  clip-path: polygon(0 100%, 10% 60%, 30% 90%, 50% 50%, 75% 85%, 100% 40%, 100% 100%);
+}
+
+/* --- MAIN CONTAINER & CARD --- */
+.container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.card {
+  position: absolute;
+  width: 90%;
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 15px 35px rgba(58, 34, 25, 0.15);
+  border: 2px solid #f3e9dc;
+  text-align: center;
+  bottom: 10px;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(0) scale(0.95);
+}
+
+.envelope-wrapper.open .card {
+  opacity: 1;
+  transform: translateY(-160px) scale(1);
+  z-index: 12;
+}
+
+.card-tag {
+  display: inline-block;
+  background: rgba(217, 56, 58, 0.1);
+  color: var(--peru-red);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.main-title {
+  font-family: 'Cinzel', serif;
+  color: var(--peru-red);
+  font-size: 1.4rem;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.timeline-btn {
+  background: var(--peru-red);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(217, 56, 58, 0.3);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.timeline-btn:hover {
+  background: #b52b2d;
+  transform: scale(1.04);
+}
+
+/* --- PERU FLAG ENVELOPE DESIGN --- */
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(to right, 
+    var(--peru-red) 0%, var(--peru-red) 33.33%, 
+    var(--peru-white) 33.33%, var(--peru-white) 66.66%, 
+    var(--peru-red) 66.66%, var(--peru-red) 100%
+  );
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  z-index: 5;
+  transition: opacity 0.5s ease 0.6s;
+  border: 2px solid #b82d2f;
+}
+
+.envelope-wrapper.open .envelope {
+  pointer-events: none;
+}
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, 
+    #c42e30 0%, #c42e30 33.33%, 
+    #f2f2f2 33.33%, #f2f2f2 66.66%, 
+    #c42e30 66.66%, #c42e30 100%
+  );
+  clip-path: polygon(0 35%, 50% 65%, 100% 35%, 100% 100%, 0 100%);
+  z-index: 4;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to right, 
+    #b02527 0%, #b02527 33.33%, 
+    #e6e6e6 33.33%, #e6e6e6 66.66%, 
+    #b02527 66.66%, #b02527 100%
+  );
+  clip-path: polygon(0 0, 100% 0, 50% 80%);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 5;
+}
+
+.envelope-wrapper.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+/* --- SLIDER SEAL --- */
+.slide-seal-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  width: 80%;
+  transition: opacity 0.3s ease;
+}
+
+.envelope-wrapper.open .slide-seal-container {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slide-track {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background: rgba(255, 252, 247, 0.95);
+  border-radius: 30px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(217, 56, 58, 0.3);
+}
+
+.slide-instruction {
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--mountain-3);
+  letter-spacing: 1px;
+  user-select: none;
+  padding-left: 40px;
+}
+
+.slide-thumb {
+  position: absolute;
+  left: 5px;
+  width: 40px;
+  height: 40px;
+  background: var(--peru-red);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  box-shadow: 0 4px 10px rgba(217, 56, 58, 0.4);
+  user-select: none;
+  touch-action: none;
+}
+
+.thumb-flag {
+  width: 20px;
+  height: 14px;
+  background: linear-gradient(to right, #d9383a 33%, #ffffff 33%, #ffffff 66%, #d9383a 66%);
+  border-radius: 2px;
+}
+
+/* --- EXPLODING FACT CARDS --- */
+.facts-explosion-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.fact-card {
+  position: absolute;
+  width: 130px;
+  background: #fffcf7;
+  border: 2px solid var(--peru-red);
+  border-radius: 14px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(58, 34, 25, 0.2);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.fact-card .fact-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.fact-card h4 {
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.fact-card p {
+  font-size: 0.6rem;
+  color: var(--peru-red);
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.envelope-wrapper.open .fact-card {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.envelope-wrapper.open .fact-card.burst-1 { top: -20px; left: -80px; transform: rotate(-12deg) scale(1); }
+.envelope-wrapper.open .fact-card.burst-2 { top: -60px; left: 50%; transform: translateX(-50%) rotate(4deg) scale(1); }
+.envelope-wrapper.open .fact-card.burst-3 { top: -20px; right: -80px; transform: rotate(12deg) scale(1); }
+.envelope-wrapper.open .fact-card.burst-4 { top: 140px; left: -90px; transform: rotate(-8deg) scale(1); }
+.envelope-wrapper.open .fact-card.burst-5 { top: 140px; right: -90px; transform: rotate(8deg) scale(1); }
+.envelope-wrapper.open .fact-card.burst-6 { bottom: -40px; left: 50%; transform: translateX(-50%) rotate(-3deg) scale(1); }
+
+.fact-card:hover {
+  transform: scale(1.1) !important;
+  z-index: 30;
+}
+
+/* --- MODALS GENERAL --- */
+.fact-modal, .timeline-modal, .secret-modal, .friend-page-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 34, 25, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  padding: 20px;
+}
+
+.fact-modal.active, .timeline-modal.active, .secret-modal.active, .friend-page-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.close-modal-btn, .close-fact-btn, .close-timeline-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* --- SECRET AUTH PUZZLE MODAL --- */
+.secret-modal-content {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 30px 24px;
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  border: 3px solid var(--peru-gold);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.secret-badge {
+  background: rgba(242, 183, 5, 0.2);
+  color: #b38200;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.secret-modal-content h2 {
+  font-family: 'Cinzel', serif;
+  color: var(--peru-red);
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.puzzle-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.puzzle-box {
+  background: #fdf6ec;
+  border: 1px solid #ebd8c3;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.puzzle-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.puzzle-item:last-child {
+  margin-bottom: 0;
+}
+
+.p-num {
+  background: var(--peru-red);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.pass-input-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pass-input-group input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #e0cfbd;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.pass-input-group input:focus {
+  border-color: var(--peru-red);
+}
+
+.pass-input-group button {
+  background: var(--peru-red);
+  color: white;
+  border: none;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pass-input-group button:hover {
+  background: #b52b2d;
+}
+
+.pass-error {
+  color: var(--peru-red);
+  font-size: 0.75rem;
+  margin-top: 10px;
+  font-weight: 700;
+  display: none;
+}
+
+.pass-error.visible {
+  display: block;
+}
+
+/* --- SECRET FRIEND CELEBRATION PAGE --- */
+.friend-page-modal {
+  z-index: 150;
+}
+
+.friend-page-content {
+  background: linear-gradient(180deg, #fffcf7 0%, #fdefdf 100%);
+  border-radius: 28px;
+  padding: 30px 22px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  border: 3px solid var(--peru-red);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.friend-tag {
+  background: var(--peru-red);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* POLAROID FRAME WITH SHINY GOLD BORDER */
+.polaroid-frame {
+  background: #ffffff;
+  padding: 12px 12px 20px 12px;
+  border-radius: 6px;
+  max-width: 240px;
+  margin: 0 auto 20px;
+  border: 4px solid #f2b705;
+  outline: 2px solid #fff;
+  box-shadow: 
+    0 0 15px rgba(242, 183, 5, 0.6), 
+    0 15px 30px rgba(58, 34, 25, 0.3);
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.polaroid-img-wrapper {
+  width: 100%;
+  height: 220px;
+  background: #f7f2eb;
+  border: 1px solid #e0d5c8;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.polaroid-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-caption {
+  font-family: 'Sacramento', cursive, 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-dark);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.friend-greeting {
+  font-family: 'Cinzel', serif;
+  color: var(--peru-red);
+  font-size: 1.25rem;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.friend-message {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed var(--peru-red);
+}
+
+.friend-message em {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}
+
+/* --- FACT & TIMELINE MODALS --- */
+.fact-modal-content, .timeline-content {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 25px;
+  max-width: 450px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  border: 2px solid var(--peru-gold);
+}
+
+.fact-modal-content h3 {
+  color: var(--peru-red);
+  font-family: 'Cinzel', serif;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+}
+
+.fact-modal-content p {
+  color: var(--text-dark);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.timeline-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.timeline-content h2 {
+  font-family: 'Cinzel', serif;
+  color: var(--peru-red);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.timeline-stepper {
+  position: relative;
+  border-left: 3px solid var(--peru-red);
+  margin-left: 15px;
+  padding-left: 20px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  background: var(--peru-gold);
+  border: 2px solid var(--peru-red);
+  border-radius: 50%;
+}
+
+.timeline-date {
+  font-weight: 700;
+  color: var(--peru-red);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.timeline-body h3 {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin: 2px 0;
+}
+
+.timeline-body p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* --- FLOATING FLAGS --- */
+.flags-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.peru-flag-particle {
+  position: absolute;
+  width: 28px;
+  height: 18px;
+  background: linear-gradient(to right, #d9383a 33.3%, #ffffff 33.3%, #ffffff 66.6%, #d9383a 66.6%);
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+/* --- ANIMALS PARADE --- */
+.animals-parade {
+  position: fixed;
+  bottom: 8px;
+  left: -400px;
+  display: flex;
+  gap: 25px;
+  align-items: flex-end;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.animals-parade.walk {
+  animation: paradeWalk 14s linear forwards;
+}
+
+.animal.llama {
+  width: 140px;
+  height: 150px;
+  animation: bobbing 0.6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+}
+
+.animal.alpaca {
+  width: 120px;
+  height: 130px;
+  animation: bobbing 0.6s ease-in-out infinite alternate-reverse;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+}
+
+.animal.guinea-pig {
+  width: 55px;
+  height: 55px;
+  animation: scurrying 0.25s ease-in-out infinite alternate;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+}
+
+@keyframes bobbing {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+@keyframes scurrying {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-4px) rotate(2deg); }
+}
+
+@keyframes paradeWalk {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 600px)); }
+}

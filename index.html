@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Hispanic Heritage Month!</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Aesthetic Peruvian Mountain Backdrop -->
+  <div class="landscape-bg">
+    <div class="sky"></div>
+    <!-- Secret Sun Button -->
+    <div class="sun secret-sun-btn" id="secretSunBtn" title="Click the Sun... ✨"></div>
+    <div class="mountains mountain-back"></div>
+    <div class="mountains mountain-mid"></div>
+    <div class="mountains mountain-front"></div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+
+    <!-- Envelope Wrapper -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+      
+      <!-- Inside Main Card -->
+      <div class="card" id="card">
+        <span class="card-tag">Peru Edition 🦙</span>
+        <h1 class="main-title">Happy Hispanic Heritage Month!</h1>
+        <p class="subtitle">¡Celebrando la rica cultura, historia y maravillas del Perú!</p>
+        
+        <!-- Timeline Button -->
+        <button class="timeline-btn" id="timelineToggleBtn">
+          📜 View Peru History Timeline
+        </button>
+      </div>
+
+      <!-- Envelope Elements (Peruvian Flag Theme) -->
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-flap" id="envelopeFlap"></div>
+        
+        <!-- Interactive Slider Seal -->
+        <div class="slide-seal-container" id="sealContainer">
+          <div class="slide-track" id="slideTrack">
+            <div class="slide-thumb" id="slideThumb">
+              <div class="thumb-flag"></div>
+            </div>
+            <span class="slide-instruction">SLIDE ACROSS TO OPEN ✨</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exploding Fact Cards Layer -->
+      <div class="facts-explosion-layer" id="factsExplosionLayer">
+        
+        <div class="fact-card burst-1" data-title="Earthquake Proof Masonry" data-desc="Inca stones at Machu Picchu were cut so perfectly without mortar that they bounce during earthquakes and slide back into place! You can't fit a sheet of paper between them.">
+          <span class="fact-icon">⛰️</span>
+          <h4>Seamless Stones</h4>
+          <p>Click to learn more</p>
+        </div>
+
+        <div class="fact-card burst-2" data-title="Cradle of Potatoes" data-desc="Peru is home to over 3,000 distinct native potato varieties, ranging in colors from deep purple to bright yellow, grown in the high Andes for over 8,000 years.">
+          <span class="fact-icon">🥔</span>
+          <h4>3,000+ Potatoes</h4>
+          <p>Click to learn more</p>
+        </div>
+
+        <div class="fact-card burst-3" data-title="Caral: Oldest City in the Americas" data-desc="Built around 3000 BCE, Caral-Supe is the oldest known civilization in the Americas, flourishing at the same time as the Egyptian Pyramids.">
+          <span class="fact-icon">🏛️</span>
+          <h4>Ancient Caral</h4>
+          <p>Click to learn more</p>
+        </div>
+
+        <div class="fact-card burst-4" data-title="Quechua Living Language" data-desc="Quechua, the official language of the Inca Empire, is still spoken by over 8 million people across the Andes today alongside Spanish and Aymara.">
+          <span class="fact-icon">🗣️</span>
+          <h4>Quechua Heritage</h4>
+          <p>Click to learn more</p>
+        </div>
+
+        <div class="fact-card burst-5" data-title="Rainbow Mountain (Vinicunca)" data-desc="Formed by mineral weathering over millions of years, Vinicunca mountain displays vibrant natural stripes of red, pink, yellow, and turquoise.">
+          <span class="fact-icon">🌈</span>
+          <h4>Rainbow Peaks</h4>
+          <p>Click to learn more</p>
+        </div>
+
+        <div class="fact-card burst-6" data-title="The Mysterious Nazca Lines" data-desc="Carved into the southern desert between 500 BCE and 500 CE, these giant geoglyphs depicting animals and geometric figures are best viewed from the sky.">
+          <span class="fact-icon">🦅</span>
+          <h4>Nazca Geoglyphs</h4>
+          <p>Click to learn more</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- --- SECRET SUN PUZZLE & PASSWORD MODAL --- -->
+  <div class="secret-modal" id="secretAuthModal">
+    <div class="secret-modal-content">
+      <button class="close-modal-btn" id="closeAuthBtn">&times;</button>
+      <span class="secret-badge">☀️ Secret Sun Portal</span>
+      <h2>Solve the Secret Code</h2>
+      <p class="puzzle-sub">Combine the 3 clues to reveal the secret password!</p>
+
+      <div class="puzzle-box">
+        <div class="puzzle-item">
+          <span class="p-num">1</span>
+          <p>Land of Incas & Machu Picchu (4 letters): <strong>P _ _ U</strong></p>
+        </div>
+        <div class="puzzle-item">
+          <span class="p-num">2</span>
+          <p>Spanish word for 'IS' (2 letters): <strong>E _</strong></p>
+        </div>
+        <div class="puzzle-item">
+          <span class="p-num">3</span>
+          <p>Spanish word for 'KEY' (5 letters): <strong>C _ A _ E</strong></p>
+        </div>
+      </div>
+
+      <div class="pass-input-group">
+        <input type="text" id="passInput" placeholder="ENTER SECRET PASSWORD..." autocomplete="off" />
+        <button id="submitPassBtn">UNLOCK ✨</button>
+      </div>
+      <p class="pass-error" id="passError">Incorrect password! Solve the clues above.</p>
+    </div>
+  </div>
+
+  <!-- --- SECRET FRIEND CELEBRATION PAGE MODAL --- -->
+  <div class="friend-page-modal" id="friendPageModal">
+    <div class="friend-page-content">
+      <button class="close-modal-btn" id="closeFriendPageBtn">&times;</button>
+      
+      <span class="friend-tag">✨ FAVORITE LATINA ✨</span>
+      
+      <!-- Polaroid Frame with Shiny Gold Border -->
+      <div class="polaroid-frame">
+        <div class="polaroid-img-wrapper">
+          <img src="friend.jpg" alt="My Favorite Peruvian" id="friendPhotoImg" />
+        </div>
+        <p class="polaroid-caption">La peruana más bonita ❤️</p>
+      </div>
+
+      <h1 class="friend-greeting">
+        HAPPY HISPANIC HERITAGE MONTH TO MY FAVORITE LATINA AND PERUVIAN! ❤️✨
+      </h1>
+      
+      <!-- Spanish Joke Message -->
+      <p class="friend-message">
+        La peruana más bonita que camina por este planeta <br>
+        <em>(no que corre, porque se tropieza y se tuerce los tobillos 😉)</em>
+      </p>
+    </div>
+  </div>
+
+  <!-- Interactive Timeline Drawer Modal -->
+  <div class="timeline-modal" id="timelineModal">
+    <div class="timeline-content">
+      <button class="close-timeline-btn" id="closeTimelineBtn">&times;</button>
+      <h2>🇵🇪 Key Milestones in Peruvian History</h2>
+      
+      <div class="timeline-stepper">
+        <div class="timeline-item">
+          <div class="timeline-date">c. 3000 BCE</div>
+          <div class="timeline-body">
+            <h3>Caral-Supe Civilization</h3>
+            <p>The oldest known urban civilization in the Americas emerges along the Peruvian coast.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">1438 CE</div>
+          <div class="timeline-body">
+            <h3>Rise of the Inca Empire</h3>
+            <p>Pachacutec transforms Cusco into Tawantinsuyu, expanding the largest empire in pre-Columbian America.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">c. 1450 CE</div>
+          <div class="timeline-body">
+            <h3>Construction of Machu Picchu</h3>
+            <p>Inca emperor Pachacutec orders the construction of the citadel in the cloud forest sacred valley.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">1532 CE</div>
+          <div class="timeline-body">
+            <h3>Spanish Arrival</h3>
+            <p>Francisco Pizarro arrives in Cajamarca, leading to colonial rule and the foundation of Lima in 1535.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">July 28, 1821</div>
+          <div class="timeline-body">
+            <h3>Proclamation of Independence</h3>
+            <p>General José de San Martín officially declares Peru an independent republic.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Fact Modal -->
+  <div class="fact-modal" id="factModal">
+    <div class="fact-modal-content">
+      <button class="close-fact-btn" id="closeFactBtn">&times;</button>
+      <h3 id="modalTitle">Fact Title</h3>
+      <p id="modalDesc">Fact Description</p>
+    </div>
+  </div>
+
+  <!-- Peruvian Flags Floating Layer -->
+  <div class="flags-container" id="flagsContainer"></div>
+
+  <!-- Animated Parade (Llama, Alpaca, Guinea Pigs) -->
+  <div class="animals-parade" id="animalsParade">
+    <svg class="animal llama" viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="45" y="110" width="10" height="60" rx="4" fill="#d2bba0" />
+      <rect x="65" y="115" width="10" height="55" rx="4" fill="#bfa58a" />
+      <rect x="110" y="110" width="10" height="60" rx="4" fill="#d2bba0" />
+      <rect x="130" y="115" width="10" height="55" rx="4" fill="#bfa58a" />
+      <ellipse cx="90" cy="100" rx="45" ry="32" fill="#e8d5b7" />
+      <path d="M 65 75 Q 90 65 115 75 L 110 120 Q 90 130 70 120 Z" fill="#d9383a" />
+      <path d="M 68 85 Q 90 75 112 85" fill="none" stroke="#f2b705" stroke-width="4" />
+      <path d="M 105 95 L 130 35 L 142 20 Q 148 15 145 25 L 132 55 L 120 100 Z" fill="#e8d5b7" />
+      <ellipse cx="140" cy="22" rx="14" ry="10" fill="#e8d5b7" />
+      <circle cx="151" cy="23" r="2" fill="#3a2219" />
+      <path d="M 132 14 Q 125 5 135 10 Z" fill="#d2bba0" />
+      <path d="M 128 15 Q 138 8 146 14 L 144 20 Q 136 14 128 18 Z" fill="#d9383a" />
+      <circle cx="136" cy="10" r="3" fill="#f2b705" />
+    </svg>
+
+    <svg class="animal alpaca" viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="115" width="10" height="55" rx="4" fill="#d6c5b0" />
+      <rect x="58" y="115" width="10" height="55" rx="4" fill="#c2b09a" />
+      <rect x="105" y="115" width="10" height="55" rx="4" fill="#d6c5b0" />
+      <rect x="123" y="115" width="10" height="55" rx="4" fill="#c2b09a" />
+      <circle cx="60" cy="95" r="24" fill="#f7f2eb" />
+      <circle cx="80" cy="90" r="26" fill="#ffffff" />
+      <circle cx="100" cy="95" r="24" fill="#f0e6dc" />
+      <path d="M 95 90 L 115 40 L 125 30 Z" fill="#ffffff" />
+      <circle cx="125" cy="28" r="14" fill="#ffffff" />
+      <circle cx="132" cy="27" r="2.5" fill="#3a2219" />
+      <ellipse cx="118" cy="18" rx="3.5" ry="9" fill="#f7f2eb" transform="rotate(-15 118 18)" />
+      <circle cx="108" cy="50" r="5" fill="#d9383a" />
+      <circle cx="115" cy="56" r="5" fill="#f2b705" />
+    </svg>
+
+    <svg class="animal guinea-pig" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="65" rx="25" ry="16" fill="#a66b49" />
+      <path d="M 35 65 Q 40 45 65 55 Z" fill="#f2ede4" />
+      <circle cx="68" cy="60" r="3" fill="#3a2219" />
+      <rect x="38" y="78" width="5" height="12" rx="2" fill="#8c5338" />
+      <rect x="58" y="78" width="5" height="12" rx="2" fill="#8c5338" />
+    </svg>
+
+    <svg class="animal guinea-pig" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="65" rx="25" ry="16" fill="#3a2219" />
+      <path d="M 35 65 Q 45 45 65 55 Z" fill="#d9383a" />
+      <circle cx="68" cy="60" r="3" fill="#ffffff" />
+      <rect x="38" y="78" width="5" height="12" rx="2" fill="#24140f" />
+      <rect x="58" y="78" width="5" height="12" rx="2" fill="#24140f" />
+      <circle cx="66" cy="44" r="3" fill="#f2b705" />
+    </svg>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
